@@ -1,6 +1,6 @@
 import TileMap from "./TileMap.js";
 
-const tileSize = 64;
+const tileSize = 32;
 const velocity = 2;
 
 const canvas = document.getElementById("gameCanvas");
@@ -53,22 +53,23 @@ function pause() {
 
 function drawGameEnd() {
   if (gameOver || gameWin) {
-    let text = " You Win!";
+    let text = "   You Win!";
     if (gameOver) {
       text = "Game Over";
     }
 
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, canvas.height / 3.2, canvas.width, 80);
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, canvas.height / 3, canvas.width, 100);
 
-    ctx.font = "75px comic sans";
+    ctx.font = "70px gothic";
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-    gradient.addColorStop("0", "magenta");
-    gradient.addColorStop("0.5", "blue");
-    gradient.addColorStop("1.0", "red");
+    gradient.addColorStop("0", "gray");
+    //gradient.addColorStop("0.5", "white");
+    gradient.addColorStop("1.0", "black");
 
     ctx.fillStyle = gradient;
     ctx.fillText(text, 10, canvas.height / 2);
+    draw(rect);
   }
 }
 
