@@ -1,7 +1,7 @@
 import TileMap from "./TileMap.js";
 
-const tileSize = 32;
-const velocity = 2;
+const tileSize = 64;
+const velocity = 4;
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -11,8 +11,6 @@ const enemies = tileMap.getEnemies(velocity);
 
 let gameOver = false;
 let gameWin = false;
-const gameOverSound = new Audio("sounds/gameOver.wav");
-const gameWinSound = new Audio("sounds/gameWin.wav");
 
 function gameLoop() {
   tileMap.draw(ctx);
@@ -26,18 +24,12 @@ function gameLoop() {
 function checkGameWin() {
   if (!gameWin) {
     gameWin = tileMap.didWin();
-    if (gameWin) {
-      gameWinSound.play();
-    }
   }
 }
 
 function checkGameOver() {
   if (!gameOver) {
     gameOver = isGameOver();
-    if (gameOver) {
-      gameOverSound.play();
-    }
   }
 }
 
@@ -55,20 +47,19 @@ function drawGameEnd() {
   if (gameOver || gameWin) {
     let text = "   You Win!";
     if (gameOver) {
-      text = "Game Over";
+      text = " Game Over";
     }
 
     ctx.fillStyle = "white";
-    ctx.fillRect(0, canvas.height / 3, canvas.width, 100);
+    ctx.fillRect(0, canvas.height / 3.5, canvas.width, 225);
 
-    ctx.font = "70px gothic";
+    ctx.font = "150px gothic";
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
     gradient.addColorStop("0", "gray");
-    //gradient.addColorStop("0.5", "white");
     gradient.addColorStop("1.0", "black");
 
     ctx.fillStyle = gradient;
-    ctx.fillText(text, 10, canvas.height / 2);
+    ctx.fillText(text, 20, canvas.height / 2);
     draw(rect);
   }
 }
